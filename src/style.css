@@ -1,0 +1,177 @@
+:root {
+  --text-dark: #121212;
+  --text-light: #f5f5f7;
+  --card-bg: rgba(20, 20, 22, 0.75);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --accent: #00ffcc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-light);
+  background-color: var(--text-dark);
+  overflow-x: hidden;
+  smooth-scroll: auto;
+}
+
+/* Background Canvas styling */
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; 
+  pointer-events: none;
+}
+
+#app {
+  padding-top: 100px; /* Space for the fixed header */
+}
+
+/* Scroll content container */
+.content {
+  position: absolute; 
+  top: 100px;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+}
+
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+
+/* Navigation Tabs */
+.tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  pointer-events: none; 
+}
+
+.tabs-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 50px;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  pointer-events: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-light);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn.active {
+  background: var(--text-light);
+  color: var(--text-dark);
+}
+
+/* Two-column Layout for each Step */
+.step {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  padding: 4rem 10vw;
+  min-height: 70vh;
+  width: 100%;
+}
+
+.step:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* Text Content Card */
+.card {
+  flex: 1;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* 3D Viewer Container */
+.viewer {
+  flex: 1.2;
+  height: 50vh;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  /* The viewer receives pointer events for OrbitControls */
+  pointer-events: auto;
+  cursor: grab;
+  background: transparent;
+}
+
+.viewer:active {
+  cursor: grabbing;
+}
+
+/* Typography Details */
+h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  color: #fff;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #ccc;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+strong, em {
+  color: var(--accent);
+  font-style: normal;
+}

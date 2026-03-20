@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js Concepts Interactive Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Single full-screen canvas -->
+    <canvas id="bg-canvas"></canvas>
+      
+    <nav class="tabs">
+      <div class="tabs-container">
+        <button class="tab-btn active" data-target="basic">Basic (6)</button>
+        <button class="tab-btn" data-target="intermediate">Intermediate (5)</button>
+        <button class="tab-btn" data-target="advanced">Advanced (5)</button>
+        <button class="tab-btn" data-target="expert">Expert (4)</button>
+        <button class="tab-btn" data-target="physics">Physics (3)</button>
+      </div>
+    </nav>
+
+    <div id="app">
+      <!-- BASIC TAB -->
+      <main class="content tab-content active" id="basic">
+        
+        <section class="step">
+          <div class="card text-content">
+            <h1>Geometries</h1>
+            <p>Three.js provides numerous built-in primitive shapes. These mathematically generated shapes form the foundation of any scene.</p>
+            <p><strong>Interact:</strong> Drag the box on the right to orbit the camera around the objects!</p>
+          </div>
+          <div class="viewer" id="view-basic-geom"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Materials</h2>
+            <p>Materials define how surfaces react to light. We have <em>Basic</em> (unlit), <em>Lambert</em> (matte), <em>Standard</em> (PBR), and <em>Physical</em> (advanced PBR with clearcoats).</p>
+            <p>Notice how the exact same geometry looks drastically different depending on its material properties.</p>
+          </div>
+          <div class="viewer" id="view-basic-mat"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Lighting</h2>
+            <p>Without light, standard materials are invisible. Here we compare an <em>AmbientLight</em> (flat overall lighting), <em>PointLight</em> (like a lightbulb), and a <em>SpotLight</em>.</p>
+          </div>
+          <div class="viewer" id="view-basic-light"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Shadows</h2>
+            <p>Shadows ground objects in reality. They require enabling shadow maps on the renderer, light (cast), object (cast), and floor plane (receive).</p>
+          </div>
+          <div class="viewer" id="view-basic-shadow"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Group Hierarchy</h2>
+            <p>You can group objects together. If you rotate the parent group, all children rotate with it, relative to the parent's pivot. This is perfect for planetary systems, robot arms, or cars.</p>
+            <p>Watch how the moon orbits the earth, while the earth orbits the sun.</p>
+          </div>
+          <div class="viewer" id="view-basic-hierarchy"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Cameras</h2>
+            <p>Two main camera types exist: <em>Perspective</em> (mimics human eye, objects get smaller in the distance) and <em>Orthographic</em> (flat isometric projection, no vanishing point).</p>
+          </div>
+          <div class="viewer" id="view-basic-camera"></div>
+        </section>
+
+      </main>
+
+      <!-- INTERMEDIATE TAB -->
+      <main class="content tab-content" id="intermediate">
+        
+        <section class="step">
+          <div class="card text-content">
+            <h1>Color Textures</h1>
+            <p>Instead of solid math-based colors, we can map 2D images onto 3D surfaces. This is called a Diffuse Map or Color Map.</p>
+          </div>
+          <div class="viewer" id="view-int-texture"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>PBR & Normal Maps</h2>
+            <p>To fake high-detail geometry without mathematical cost, we use a <em>Normal Map</em> to change how light hits the surface, making flats look bumpy.</p>
+            <p>Combined with <em>Roughness</em> maps, the surface looks incredibly realistic.</p>
+          </div>
+          <div class="viewer" id="view-int-pbr"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Environment Maps</h2>
+            <p>Shiny objects reflect the world around them. Using a CubeTexture mapping 6 images (like a skybox) provides cheap, realistic reflections.</p>
+          </div>
+          <div class="viewer" id="view-int-env"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>GLTF Loading</h2>
+            <p>Complex assets are created in tools like Blender and exported as GLTF/GLB files, which bundle geometries, cameras, lights, textures, and animations.</p>
+          </div>
+          <div class="viewer" id="view-int-gltf"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Raycasting</h2>
+            <p>Transforming 2D mouse coordinates into a 3D ray collision line allows us to find exactly what object the user is clicking or hovering over.</p>
+            <p>Hover over the spheres below!</p>
+          </div>
+          <div class="viewer" id="view-int-raycast"></div>
+        </section>
+
+      </main>
+
+      <!-- ADVANCED TAB -->
+      <main class="content tab-content" id="advanced">
+        
+        <section class="step">
+          <div class="card text-content">
+            <h1>InstancedMesh</h1>
+            <p>Drawing one box 10,000 times normally freezes the browser because it talks to the GPU 10,000 times per frame. <em>InstancedMesh</em> groups them all into exactly 1 draw call.</p>
+            <p>Below are 10,000 independently placed cubes.</p>
+          </div>
+          <div class="viewer" id="view-adv-instance"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Particles (Points)</h2>
+            <p>For rain, smoke, and galaxies, rendering thousands of flat textured sprites is vastly cheaper than 3D geometry. We do this using <code>THREE.Points</code>.</p>
+          </div>
+          <div class="viewer" id="view-adv-particles"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Custom Shaders</h2>
+            <p>When you need total control, you bypass Three's materials and write raw GLSL code to execute directly on the GPU for every single pixel.</p>
+            <p>Here we displace geometry vertices using mathematical sine waves.</p>
+          </div>
+          <div class="viewer" id="view-adv-shader"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Render Targets</h2>
+            <p>You can render a scene onto a secondary texture instead of the screen, and then map that texture onto a mesh object. Perfect for security cameras, mirrors, or TV screens.</p>
+          </div>
+          <div class="viewer" id="view-adv-target"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Post-Processing (Bloom)</h2>
+            <p>Before showing the final frame to the user, we can pass it through a series of full-screen image filters. <em>UnrealBloomPass</em> makes bright pixels bleed and glow.</p>
+          </div>
+          <div class="viewer" id="view-adv-bloom"></div>
+        </section>
+
+      </main>
+
+      <!-- EXPERT TAB -->
+      <main class="content tab-content" id="expert">
+        <section class="step">
+          <div class="card text-content">
+            <h1>Raymarching & SDFs</h1>
+            <p>Instead of polygons, we can mathematically define shapes using <em>Signed Distance Fields</em> and evaluate them via a Raymarching fragment shader. Notice how these spheres melt together like liquid metal without any geometry!</p>
+          </div>
+          <div class="viewer" id="view-exp-raymarch"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Curl Noise GPU Particles</h2>
+            <p>Moving 100,000 particles on the CPU is slow. By passing time into a procedural <em>Curl Noise</em> mathematical function directly in the Vertex Shader, the GPU can effortlessly simulate mesmerizing, fluid-like particle galaxies.</p>
+          </div>
+          <div class="viewer" id="view-exp-curl"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Volumetric Raycasting</h2>
+            <p>By stepping a ray through 3D space and accumulating noise density within a mathematical volume, we can render incredibly realistic structures like swirling nebulas entirely procedurally in a single shader.</p>
+          </div>
+          <div class="viewer" id="view-exp-volume"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Next-Gen Post-Processing</h2>
+            <p>AAA games combine intense post-processing pipelines to achieve realism. This scene utilizes a complex <em>EffectComposer</em> chain featuring Screen Space Ambient Occlusion (SSAO), Depth of Field (Bokeh), and HDR Bloom.</p>
+          </div>
+          <div class="viewer" id="view-exp-post"></div>
+        </section>
+      </main>
+
+      <!-- PHYSICS TAB -->
+      <main class="content tab-content" id="physics">
+        
+        <section class="step">
+          <div class="card text-content">
+            <h1>Rigid Bodies & Colliders</h1>
+            <p>Physics engines handle gravity and collisions. <em>Dynamic</em> bodies yield to forces (like falling cubes), while <em>Fixed</em> bodies remain static (like the floor).</p>
+          </div>
+          <div class="viewer" id="view-phys-rigid"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Kinematic Bodies</h2>
+            <p>Sometimes you need an object to move programmatically but still violently push physics objects out of its way. A <em>KinematicPositionBased</em> moving arm demonstrates this.</p>
+          </div>
+          <div class="viewer" id="view-phys-kinematic"></div>
+        </section>
+
+        <section class="step">
+          <div class="card text-content">
+            <h2>Joints & Constraints</h2>
+            <p>You can constrain bodies together using mathematical joints. A <em>SphericalJoint</em> creates a pendulum or chain link allowing rotation but securely locking the anchor point. Watch the chain slowly swing into the tower!</p>
+          </div>
+          <div class="viewer" id="view-phys-joint"></div>
+        </section>
+
+      </main>
+    </div>
+    
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
