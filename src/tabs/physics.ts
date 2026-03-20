@@ -157,7 +157,7 @@ export const initPhysicsTab: TabInitFn = async () => {
   const vJoint = createStandardView('view-phys-joint')
   vJoint.scene.add(new THREE.AmbientLight(0xffffff, 0.5), new THREE.DirectionalLight(0xffffff, 1).translateY(5))
   vJoint.camera.position.set(6, 6, 12)
-  vJoint.controls.target.set(0, 3, 0)
+  vJoint.controls?.target.set(0, 3, 0)
 
   // Ceiling anchor
   const ceilBody = vJoint.world.createRigidBody(RAPIER.RigidBodyDesc.fixed().setTranslation(0, 6, 0))

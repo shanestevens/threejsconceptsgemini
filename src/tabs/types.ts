@@ -11,4 +11,4 @@ export interface View {
   cleanup: () => void
 }
 
-export type TabInitFn = () => View[]
+export type TabInitFn = () => View[] | Promise<View[]>
